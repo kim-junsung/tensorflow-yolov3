@@ -13,11 +13,12 @@
 
 import core.common as common
 import tensorflow as tf
+import tensorflow.compat.v1 as tf1
 
 
 def darknet53(input_data, trainable):
 
-    with tf.variable_scope('darknet'):
+    with tf1.variable_scope('darknet'):
 
         input_data = common.convolutional(input_data, filters_shape=(3, 3,  3,  32), trainable=trainable, name='conv0')
         input_data = common.convolutional(input_data, filters_shape=(3, 3, 32,  64),

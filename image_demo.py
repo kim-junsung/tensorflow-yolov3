@@ -15,6 +15,7 @@ import cv2
 import numpy as np
 import core.utils as utils
 import tensorflow as tf
+import tensorflow.compat.v1 as tf1
 from PIL import Image
 
 return_elements = ["input/input_data:0", "pred_sbbox/concat_2:0", "pred_mbbox/concat_2:0", "pred_lbbox/concat_2:0"]
@@ -33,7 +34,7 @@ image_data = image_data[np.newaxis, ...]
 return_tensors = utils.read_pb_return_tensors(graph, pb_file, return_elements)
 
 
-with tf.Session(graph=graph) as sess:
+with tf1.Session(graph=graph) as sess:
     pred_sbbox, pred_mbbox, pred_lbbox = sess.run(
         [return_tensors[1], return_tensors[2], return_tensors[3]],
                 feed_dict={ return_tensors[0]: image_data})
