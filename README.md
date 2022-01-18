@@ -5,7 +5,8 @@
 [code](https://github.com/YunYang1994/TensorFlow2.0-Examples/tree/master/4-Object_Detection/YOLOV3) | [blog](https://yunyang1994.gitee.io/2018/12/28/YOLOv3-算法的一点理解/)  | [issue](https://github.com/YunYang1994/tensorflow-yolov3/issues/39)
 
 ## part 1. Quick start
-1. Clone this file
+0. This instruction assumes that you are using Python 3.9 
+1. Clone this repository
 ```bashrc
 $ git clone https://github.com/kim-junsung/tensorflow-yolov3.git
 ```
