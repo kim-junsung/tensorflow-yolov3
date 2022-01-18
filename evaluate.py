@@ -16,9 +16,12 @@ import os
 import shutil
 import numpy as np
 import tensorflow as tf
+import tensorflow.compat.v1 as tf1
 import core.utils as utils
 from core.config import cfg
 from core.yolov3 import YOLOV3
+
+tf1.disable_eager_execution()
 
 class YoloTest(object):
     def __init__(self):
@@ -36,18 +39,18 @@ class YoloTest(object):
         self.write_image_path = cfg.TEST.WRITE_IMAGE_PATH
         self.show_label       = cfg.TEST.SHOW_LABEL
 
-        with tf.name_scope('input'):
-            self.input_data = tf.placeholder(dtype=tf.float32, name='input_data')
-            self.trainable  = tf.placeholder(dtype=tf.bool,    name='trainable')
+        with tf1.name_scope('input'):
+            self.input_data = tf1.placeholder(dtype=tf1.float32, name='input_data')
+            self.trainable  = tf1.placeholder(dtype=tf1.bool,    name='trainable')
 
         model = YOLOV3(self.input_data, self.trainable)
         self.pred_sbbox, self.pred_mbbox, self.pred_lbbox = model.pred_sbbox, model.pred_mbbox, model.pred_lbbox
 
-        with tf.name_scope('ema'):
-            ema_obj = tf.train.ExponentialMovingAverage(self.moving_ave_decay)
+        with tf1.name_scope('ema'):
+            ema_obj = tf1.train.ExponentialMovingAverage(self.moving_ave_decay)
 
-        self.sess  = tf.Session(config=tf.ConfigProto(allow_soft_placement=True))
-        self.saver = tf.train.Saver(ema_obj.variables_to_restore())
+        self.sess  = tf1.Session(config=tf1.ConfigProto(allow_soft_placement=True))
+        self.saver = tf1.train.Saver(ema_obj.variables_to_restore())
         self.saver.restore(self.sess, self.weight_file)
 
     def predict(self, image):
