@@ -7,7 +7,7 @@
 ## part 1. Quick start
 1. Clone this file
 ```bashrc
-$ git clone https://github.com/YunYang1994/tensorflow-yolov3.git
+$ git clone https://github.com/kim-junsung/tensorflow-yolov3.git
 ```
 2.  You are supposed  to install some dependencies before getting out hands with these codes.
 ```bashrc
